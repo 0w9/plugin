@@ -11,7 +11,7 @@ figma.ui.onmessage = async (pluginmessage) => {
     console.log(pluginmessage.assets)
     const header = pluginmessage.assets.header;
     const subheader = pluginmessage.assets.subheader;
-    const description = pluginmessage.assets.description;
+    //const description = pluginmessage.assets.description;
     const cta = pluginmessage.assets.cta;
     const colors = pluginmessage.assets.colors;
 
