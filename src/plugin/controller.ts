@@ -1,19 +1,20 @@
 figma.showUI(__html__)
 
-async function fetchAssets() {
-}
-
-
 figma.ui.onmessage = async (pluginmessage) => {
-  if (pluginmessage.action === 'fetchedAssets') {
-    console.log(JSON.stringify(pluginmessage.assets.header))
+  if (pluginmessage.action === 'fetchLicense') {
+    await figma.clientStorage.setAsync("license", "lennardtest")
+    const license = await figma.clientStorage.getAsync("license")
+    figma.ui.postMessage({
+      type: "fetchedLicense",
+      license
+    })
+  }
 
-    console.log(pluginmessage.assets)
-    const header = pluginmessage.assets.header;
-    const subheader = pluginmessage.assets.subheader;
-    //const description = pluginmessage.assets.description;
-    const cta = pluginmessage.assets.cta;
-    const colors = pluginmessage.assets.colors;
+  if(pluginmessage.action === "createPage") {
+    const colors = pluginmessage.assets.colors
+    const header = pluginmessage.assets.header
+    const subheader = pluginmessage.assets.subheader
+    const cta = pluginmessage.assets.cta
 
     for(const color of colors) {
       if(color.r === 0) color.r = 0.1
