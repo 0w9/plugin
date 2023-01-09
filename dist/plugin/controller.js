@@ -9,6 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 figma.showUI(__html__);
 figma.ui.onmessage = (pluginmessage) => __awaiter(this, void 0, void 0, function* () {
+<<<<<<< HEAD
     if (pluginmessage.action === 'fetchedAssets') {
         console.log(JSON.stringify(pluginmessage.assets.header));
         console.log(pluginmessage.assets);
@@ -16,6 +17,21 @@ figma.ui.onmessage = (pluginmessage) => __awaiter(this, void 0, void 0, function
         const subheader = pluginmessage.assets.subheader;
         const cta = pluginmessage.assets.cta;
         const colors = pluginmessage.assets.colors;
+=======
+    if (pluginmessage.action === 'fetchLicense') {
+        yield figma.clientStorage.setAsync("license", "lennardtest");
+        const license = yield figma.clientStorage.getAsync("license");
+        figma.ui.postMessage({
+            type: "fetchedLicense",
+            license
+        });
+    }
+    if (pluginmessage.action === "createPage") {
+        const colors = pluginmessage.assets.colors;
+        const header = pluginmessage.assets.header;
+        const subheader = pluginmessage.assets.subheader;
+        const cta = pluginmessage.assets.cta;
+>>>>>>> 51c8f2aa490d95478594724a49ed3d312513ee96
         for (const color of colors) {
             if (color.r === 0)
                 color.r = 0.1;

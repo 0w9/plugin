@@ -24,14 +24,17 @@ function App() {
             'Content-Type': 'application/json',
         },
       body: JSON.stringify({
-        "license": "lennardtest"
+        "license": (document.getElementById("license-input") as HTMLInputElement).value
       })
     })
 
     const json = await req.json()
 
     const license = json.license
-    const isPremium = json.isPremium
+
+    const isPremium = json.canGenerate
+
+    console.log(json)
 
     if(isPremium) {
       const assetReq = await fetch("http://localhost:3000/api/generate", {
@@ -54,6 +57,9 @@ function App() {
           assets
         },
       }, "*")
+    } else {
+      console.log("You can't do this!")
+
     }
   }
 
@@ -62,6 +68,7 @@ function App() {
       <h1 className="text-3xl font-bold underline">demo 🪄</h1>
 
       <input id="prompt-input" type="text" placeholder="Enter your idea." />
+      <input id="license-input" type="text" placeholder="Enter your license." />
       <button onClick={getLicense}>Create</button>
     </>
   );
